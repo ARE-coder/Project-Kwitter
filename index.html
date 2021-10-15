@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>   
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Birthstone&family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1 id="hours"> </h1> <span id="minutes"> </span>
+        <h1 style="text-align: center; font-size: 70px;"> Let's Chat </h1>
+        <center>
+            <div id="sign_in">
+                <img src="School img.jpg" id="img">
+                <h1> Welcome to <b> <u> <i> Let's Chat </i></u></b> </h1>
+                <br>
+                <h1> Username: </h1>
+                <br>
+                <input id="login" class="form-control" type="text" placeholder="Username">
+                <br>
+                <button id="submit" class="btn btn-success" onclick="adduser()"> Login </button>
+            </div>
+        </center>
+    </body>
+    <style>
+        
+    body{
+        background-image: url("The\ login\ pic.jpg");
+        background-position: center;
+        background-size: cover;
+        font-family: 'Birthstone', cursive;
+        font-size: 50px;   
+    }
+    #sign_in{
+        background-color: rgb(50, 90, 163);
+        color:cyan;
+        top:rgb(0, 162, 255);
+        width:750px;
+    }
+    #img
+    {
+        border-width:10px;
+        border-color: grey;
+        border-style: ridge;
+        height:150;
+        width: 150;
+        border-radius: 50%;
+    }
+    #submit
+    {
+        width:70%;
+        font-size: 35px;
+    }
+    #login
+    {
+        font-size:20px;
+    }
+
+    </style>
+    <script>
+        function adduser()
+        {
+            var a = document.getElementById("login").value;
+            localStorage.setItem("Username", a );
+            document.getElementById("login").value = " "
+            window.location = "Letchat_room.html";
+        }
+    </script>
+</html>
