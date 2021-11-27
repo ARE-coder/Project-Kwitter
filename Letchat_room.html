@@ -10,103 +10,90 @@
      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
      <link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1">
      <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
-    
     </head>
+    <body onload="add()">
+        <button id="logout" class="glyphicon glyphicon-log-out btn btn-danger" onclick="logout()"> Logout </button>
+         
+          <h1 id="user"> </h1>
+          <div id="output"> 
 
-    <body>
-        <button id="signout" class="glyphicon glyphicon-log-out btn btn-danger" onclick="logout()"> Logout </button>  
-        <br>
-        <br>  
-        <center>
-            <h1 id="username"> </h1>
-            <div id="output">
-
-            </div>
-            <input tpe="text" id="room" placeholder="type in here the room name"> 
-            &nbsp; 
-            <button id="send" class="btn btn-success" onclick="roomname()"> Send </button>
-            
-            
-
-        </center>
-
-        
-        
-            
-    
+          </div>
+          <input type="text" id="room"  placeholder="Please type the room name here ">
+          
+          <button id="send" class="btn btn-success" onclick="send()"> Send </button>
         
     </body>
     <style>
-        body{
-            font-family: 'Birthstone', cursive;
-            font-size: 20px; 
-            background-color: darkcyan;
-        }
-        #room{
-        width: 1475px
-        
-        }
-        .inline{
-            text-align: center;
-            display: inline;
-        }
-    </style>
-    <script type="module">
-        var firebaseConfig = {  
-     apiKey: "AIzaSyAK3UA-eTe67fqDNWXhNhPOQEgnDZ7M4Eg",
-  authDomain: "project-95-a84c2.firebaseapp.com",
-  databaseURL: "https://project-95-a84c2-default-rtdb.firebaseio.com",
-  projectId: "project-95-a84c2",
-  storageBucket: "project-95-a84c2.appspot.com",
-  messagingSenderId: "701054959398",
-  appId: "1:701054959398:web:94743671464ed3698c4be7"
-
-  };
-  
-    firebase.initializeApp(firebaseConfig);
-  
-  user_name = localStorage.getItem("Username");
-  
-  document.getElementById("user_name").innerHTML = "Welcome " + user_name + "!";
-  
-  function roomname()
-  {
-    room_name = document.getElementById("room").value;
-  
-    firebase.database().ref("/").child(room_name).update({
-      purpose : "adding room name"
-    });
-  
-      localStorage.setItem("Room Name", room_name);
+      body{
+          background-color: rgb(16, 132, 209);
+      }
+      #room{
+        width: 1470px;
+      }
       
-      window.location = "kwitter_page.html";
-  }
-  
-  function getData() {  firebase.database().ref("/").on('value', function(snapshot) { document.getElementById("output").innerHTML = ""; snapshot.forEach(function(childSnapshot) { childKey  = childSnapshot.key;
-         Room_names = childKey;
-         console.log("Room Name - " + Room_names);
-        row = "<div class='room_name' id="+Room_names+" onclick='redirectToRoomName(this.id)' >#"+ Room_names +"</div><hr>";
-        document.getElementById("output").innerHTML += row;
-      });
-    });
-  
-  }
-  
-  getData();
-  
-  function redirectToRoomName(name)
-  {
-    console.log(name);
-    localStorage.setItem("room_name", name);
-      window.location = "kwitter_page.html";
-  }
-  
-  function logout() {
-  localStorage.removeItem("user_name");
-  localStorage.removeItem("room_name");
-      window.location = "index.html";
-  }
-          
+    </style>
+    <script>
+      
+      var firebaseConfig = 
+      {
+        apiKey: "AIzaSyAK3UA-eTe67fqDNWXhNhPOQEgnDZ7M4Eg",
+        authDomain: "project-95-a84c2.firebaseapp.com",
+        databaseURL: "https://project-95-a84c2-default-rtdb.firebaseio.com",
+        projectId: "project-95-a84c2",
+        storageBucket: "project-95-a84c2.appspot.com",
+        messagingSenderId: "701054959398",
+        appId: "1:701054959398:web:cc9c2c832d16928a8c4be7",
+        measurementId: "G-Q00Y7YX8MS"
+      };
+
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+      function getData() {firebase.database().ref("/").on('value',function(snapshot) {document.getElementById("output").innerHTML ="";snapshot.forEach(function(childSnapshot) {childKey = childSnapshot.key;
+       Room_Name = childKey;
+      //Start code
+      {
+             var b = document.getElementById("room").value;
+             console.log("Room Name - " +  b );
+           var row = "<div class='room_name' id="+ b + "onclick=''reDirectToRoomName(this.id)>#" + b + "</div> <hr>"
+         document.getElementById("output").innerHTML = row;
+
+         getData();
+           function reDirectToRoomName(name)
+       {
+             console.log(name);
+             localStorage.setItem("Room name", name);
+             window.location = "LC_Page.html";
+       }
+       }
+
+      //End code
+      });});}
+      function logout()
+      {
+          localStorage.removeItem("Username");
+          localStorage.removeItem("Room Name");
+          window.location = "index.html";
+      }
+      function send()
+      {
+        var a = document.getElementById("room").value;
+        localStorage.setItem("Room Name", a );
+        console.log(a);
+        firebase.database().ref("/").child(a).update({
+                  purpose : "adding Room name"
+              });
+        document.getElementById("room").value = " "
+        
+      }
+      function add()
+      {
+        var a = localStorage.getItem("Username");
+        document.getElementById("user").innerHTML = "Welcome " +  a + "!";
+        document.getElementById("user").style.textAlign = "center";
+      
+      }
+     
+      
+
     </script>
 </html>
-  
